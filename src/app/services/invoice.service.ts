@@ -6,14 +6,24 @@ import { invoiceData } from '../data/invoice.data';
   providedIn: 'root'
 })
 export class InvoiceService {
-  
-  private invoice: Invoice = invoiceData
+
+  private invoice: Invoice = invoiceData;
 
   constructor() { }
 
   getInvoice(): Invoice {
-    return this.invoice;
+    const total = this.calculateTotal();
+    return { ... this.invoice, total: total };
   }
 
+  /* Calcular el total de la factura */
+  calculateTotal() {
+    // let total = 0;
+    // this.invoice.items.forEach(item => {
+    //   total += item.total();
+    // });
+    // return total;
+    return this.invoice.items.reduce((total, item) => total + (item.price * item.quantity), 0)
+  }
 
 }
