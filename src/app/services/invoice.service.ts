@@ -16,7 +16,13 @@ export class InvoiceService {
     return { ... this.invoice, total: total };
   }
 
-  /* Calcular el total de la factura */
+  remove(id: number) {
+    this.invoice.items = this.invoice.items.filter(item => item.id != id);
+    const total = this.calculateTotal();
+    return { ... this.invoice, total };
+  }
+
+
   calculateTotal() {
     // let total = 0;
     // this.invoice.items.forEach(item => {
